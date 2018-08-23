@@ -1,11 +1,13 @@
 {
   "name": "cell-retail-app",
   "version": "0.0.0",
+  "engines": {
+    "node": "8.11.3"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build && node server.js",
     "build": "ng build",
-    "launch": "ng build && node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
