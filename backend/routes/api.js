@@ -14,7 +14,7 @@ router.use(function(req, res, next) {
 
 /* GET api listing. */
 router.get('/', (req, res) => {
-  res.send('api works');
+  res.send('Invalid page');
 });
 
 // Get all posts
@@ -35,13 +35,13 @@ router.get('/posts', (req, res) => {
  * Mongoose Declaration
  */
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/cell_retail_db');
+mongoose.connect('mongodb://localhost:27017/cell_retail_db', { useNewUrlParser: true });
 
-var Bear = require('../../src/app/models/bear');
+var Bear = require('../models/bear');
 
 router.route('/bears')
 
-  // create a bear (accessed at POST http://localhost:3000/api/bears)
+  // create a bear (accessed at POST .../api/bears)
   .post(function(req, res) {
 
     var bear = new Bear();      // create a new instance of the Bear model
@@ -57,7 +57,7 @@ router.route('/bears')
 
   })
 
-  // get all the bears (accessed at GET http://localhost:3000/api/bears)
+  // get all the bears (accessed at GET .../api/bears)
   .get(function(req, res) {
     Bear.find(function(err, bears) {
       if (err)
@@ -68,7 +68,7 @@ router.route('/bears')
   });
 
 router.route('/bears/:bear_id')
-  // get the bear with that id (accessed at GET http://localhost:3000/api/bears/:bear_id)
+  // get the bear with that id (accessed at GET .../api/bears/:bear_id)
   .get(function(req, res) {
     Bear.findById(req.params.bear_id, function(err, bear) {
       if (err)
@@ -76,7 +76,7 @@ router.route('/bears/:bear_id')
       res.json(bear);
     });
   })
-  // update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)
+  // update the bear with this id (accessed at PUT .../api/bears/:bear_id)
   .put(function(req, res) {
 
     // use our bear model to find the bear we want
